@@ -1,0 +1,24 @@
+{
+  "name": "Webdevoo",
+  "short_name": "Webdevoo",
+  "display": "standalone",
+  "theme_color": "white",
+  "background_color": "white",
+  "scope": "/",
+  "start_url": "/",
+  "id":"/",
+  "orientation": "portrait-primary",
+  "description": "concepteur de sites internet et boutiques en ligne depuis 2019",
+  "icons": [
+      {
+          "src": "./assets/logo/logo_comete_webdevoo.svg",
+          "type": "image/svg+xml",
+          "sizes": "any"
+      },
+      {
+          "src": "./assets/logo/logo_comete_webdevoo.svg",
+          "type": "image/svg+xml",
+          "sizes": "512x512"
+      }
+  ]
+}
