@@ -1264,22 +1264,30 @@ form label,
   box-sizing: border-box;
 }
 
-.rgpd-input-wrapper .rgpd::-moz-selection,
-.rgpd-input-wrapper .rgpd:after::-moz-selection,
-.rgpd-input-wrapper .rgpd:before::-moz-selection,
-.rgpd-input-wrapper .rgpd *::-moz-selection,
-.rgpd-input-wrapper .rgpd *:after::-moz-selection,
-.rgpd-input-wrapper .rgpd *:before::-moz-selection,
-.rgpd-input-wrapper .rgpd+.rgpd-btn::-moz-selection,
-.rgpd-input-wrapper .rgpd::selection,
-.rgpd-input-wrapper .rgpd:after::selection,
-.rgpd-input-wrapper .rgpd:before::selection,
-.rgpd-input-wrapper .rgpd *::selection,
-.rgpd-input-wrapper .rgpd *:after::selection,
-.rgpd-input-wrapper .rgpd *:before::selection,
-.rgpd-input-wrapper .rgpd+.rgpd-btn::selection {
-  background: none;
+.rgpd {
+  grid-area: btn;
+  display: none;
+
+  &,
+  &::after,
+  &::before,
+  & *,
+  & *::after,
+  & *::before,
+  &+.rgpd-btn {
+    box-sizing: border-box;
+  }
+
+  /* Remplacement ici : propre, valide et accepté par Vite/LightningCSS */
+  &,
+  & *,
+  &+.rgpd-btn {
+    &::selection {
+      background: none;
+    }
+  }
 }
+
 
 .rgpd-btn {
   grid-area: btn;
