@@ -26,7 +26,7 @@ const scrollToSalesPotentialSection = () => {
       </p>
 
       <IllustrationImgComponent
-        src="/assets/images/business/boutique-locale-baie-de-somme.png"
+        :src="'/assets/images/business/boutique-locale-baie-de-somme.png'"
         alt="création d'une boutique en ligne pour un commerçant"
         :lazy="true"
       />

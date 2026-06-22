@@ -15,7 +15,7 @@ const goToHome = () => {
       <img
         alt="Vue logo"
         class="logo"
-        src="/assets/logo/logo-comete-webdevoo-green-2023-256x256.svg"
+        :src="'/assets/logo/logo-comete-webdevoo-green-2023-256x256.svg'"
         width="125"
         height="125"
       />

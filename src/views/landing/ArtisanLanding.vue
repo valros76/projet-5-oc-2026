@@ -23,7 +23,7 @@ const scrollToLocalVisibilitySection = () => {
       </h1>
 
       <IllustrationImgComponent
-        src="/assets/images/business/artisan-baie-de-somme.png"
+        :src="'/assets/images/business/artisan-baie-de-somme.png'"
         alt="création d'un site pour un artisan"
         :lazy="true"
       />

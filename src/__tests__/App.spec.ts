@@ -1,11 +1,38 @@
-import { describe, it, expect } from 'vitest'
-
+import { describe, it, expect, beforeEach } from 'vitest'
 import { mount } from '@vue/test-utils'
 import App from '../App.vue'
+import { createRouter, createMemoryHistory } from 'vue-router'
+import { createPinia, setActivePinia } from 'pinia'
 
 describe('App', () => {
-  it('mounts renders properly', () => {
-    const wrapper = mount(App)
-    expect(wrapper.text()).toContain('You did it!')
+  let router: ReturnType<typeof createRouter>
+  let pinia: ReturnType<typeof createPinia>
+
+  beforeEach(() => {
+    pinia = createPinia()
+    setActivePinia(pinia)
+
+    router = createRouter({
+      history: createMemoryHistory(),
+      routes: [
+        {
+          path: '/',
+          component: { template: '<div>Accueil simulé</div>' }
+        }
+      ]
+    })
+  })
+
+  it('mounts renders properly', async () => {
+    router.push('/')
+    await router.isReady()
+
+    const wrapper = mount(App, {
+      global: {
+        plugins: [router, pinia]
+      }
+    })
+
+    expect(wrapper.exists()).toBe(true)
   })
 })

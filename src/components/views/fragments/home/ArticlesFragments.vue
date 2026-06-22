@@ -65,7 +65,7 @@ import IllustrationImgComponent from '@/components/images/IllustrationImgCompone
   <article class="main-articles">
     <h2 class="main-articles-title">Vous êtes un gérant de gîte ?</h2>
     <IllustrationImgComponent
-      src="/assets/images/business/gite.png"
+      :src="'/assets/images/business/gite.png'"
       alt="création d'un site vitrine pour un gîte"
       :lazy="true"
     />
@@ -115,7 +115,7 @@ import IllustrationImgComponent from '@/components/images/IllustrationImgCompone
   <article class="main-articles">
     <h2 class="main-articles-title">Vous avez une boutique physique de produits régionaux ?</h2>
     <IllustrationImgComponent
-      src="/assets/images/business/boutique-locale.png"
+      :src="'/assets/images/business/boutique-locale.png'"
       alt="création d'une boutique en ligne pour une boutique locale"
       :lazy="true"
     />
@@ -152,7 +152,7 @@ import IllustrationImgComponent from '@/components/images/IllustrationImgCompone
   <article class="main-articles">
     <h2 class="main-articles-title">Vous êtes un artisan de la Somme (80) ?</h2>
     <IllustrationImgComponent
-      src="/assets/images/business/artisan.png"
+      :src="'/assets/images/business/artisan.png'"
       alt="création d'une page web pour un artisan"
       :lazy="true"
     />

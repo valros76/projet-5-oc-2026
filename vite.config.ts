@@ -17,4 +17,17 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  test: {
+    environment: 'jsdom', // requis pour simuler le DOM avec Vue Test Utils
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html'], // affiche dans le terminal + génère du HTML
+      thresholds: {
+        lines: 60,
+        functions: 60,
+        branches: 60,
+        statements: 60
+      }
+    }
+  }
 })

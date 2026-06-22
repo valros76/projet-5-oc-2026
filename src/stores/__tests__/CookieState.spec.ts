@@ -10,6 +10,9 @@ import {
 describe('CookieState', () => {
   beforeEach(() => {
     globalCookieState.value = false
+
+    // ON SUPPRIME LE COOKIE pour éviter que les tests ne se polluent entre eux
+    document.cookie = 'webdevooCookieConsent=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;'
   })
 
   describe('setCookie / getCookie', () => {

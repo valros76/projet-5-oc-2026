@@ -22,7 +22,7 @@ const scrollToContributionCalculatorSection = () => {
       </h1>
 
       <IllustrationImgComponent
-        src="/assets/images/business/gite-baie-de-somme.png"
+        :src="'/assets/images/business/gite-baie-de-somme.png'"
         alt="création d'un site vitrine pour un gîte"
         :lazy="true"
       />
