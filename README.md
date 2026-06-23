@@ -57,6 +57,15 @@ PASSWORD_ENCRYPT_ALG=aes-256-gcm
 
 ### Configuration de la base de données
 
+Le backend contient des fichiers au format **.example**, vous devez changer l'extension des fichiers en fonctions de leurs type.
+
+- /api/config/.htaccess.example > */api/config/.htaccess*
+- /api/config/.htpasswd.example > */api/config/.htpasswd*
+- /api/config/config.example > */api/config/config.json*
+
+Il faudra, bien sûr, personnaliser leur contenu en fonction de vos besoins et de votre environnement.
+
+Par exemple, pour config.example.json :
 Le backend utilise le fichier `/api/config/config.json` pour gérer les connexions aux bases de données selon l'environnement sélectionné.
 
 ```json
