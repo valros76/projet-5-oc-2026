@@ -65,8 +65,6 @@ Le backend utilise le fichier `/api/config/config.json` pour gérer les connexio
     "framework",
     "controllers",
     "models",
-    "models/entity",
-    "models/manager",
     "framework/exceptions",
     "utils",
     "utils/exceptions"
