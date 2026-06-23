@@ -1,64 +1,83 @@
-# projet-5-oc-2026
+# Webdevoo Landing
 
-This template should help get you started developing with Vue 3 in Vite.
+Application dédiée à l'optimisation de la conversion pour les professionnels de la Baie de Somme (gîtes, artisans, commerçants). Ce projet vise à résoudre leurs points de friction métier grâce à des outils de calcul interactifs et une présence en ligne optimisée.
 
-## Recommended IDE Setup
+## 🚀 Technologies
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+* **Frontend** : Vue.js 3, TypeScript, Vite.
+* **Backend** : PHP 8 (Architecture MVC personnalisée).
+* **Tests** : Cypress (E2E), Vitest (Unit).
+* **Build** : Bun (recommandé) ou NPM.
 
-## Recommended Browser Setup
+## 🛠 Installation
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+### 1. Cloner le dépôt
 
-## Type Support for `.vue` Imports in TS
+```bash
+git clone <url-du-projet>
+```
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+### 2. Installation des dépendances
 
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
+```bash
+# Avec Bun (recommandé)
 bun install
+
+# Ou avec NPM
+npm install
 ```
 
-### Compile and Hot-Reload for Development
+### 3. Configuration
 
-```sh
-bun dev
+Copiez le fichier `.env.example` vers `.env` et configurez vos variables :
+
+```bash
+cp .env.example .env
 ```
 
-### Type-Check, Compile and Minify for Production
+### 4. Lancement
 
-```sh
-bun run build
+```bash
+# Mode développement
+bun run dev
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+## 🧪 Tests
 
-```sh
-bun test:unit
+Le projet inclut une suite de tests E2E pour valider les parcours utilisateurs critiques.
+
+### Tests E2E (Cypress)
+
+* Lancer en mode headless (CI) :
+
+```bash
+bun run test:e2e
 ```
 
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
+* Lancer en mode interactif :
 
-```sh
-bun test:e2e:dev
+```bash
+bun run test:e2e:dev
 ```
 
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
+### Tests Unitaires (Vitest)
 
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
+* Lancer les tests :
 
-```sh
-bun run build
-bun test:e2e
+```bash
+bun run test:unit
 ```
+
+* Avec couverture :
+
+```bash
+bun run test:unit:coverage
+```
+
+## 👥 Contributeurs
+
+* Valérian Dufrène
+
+### Entreprise
+
+Webdevoo
