@@ -28,16 +28,18 @@ describe('E2E - Espace Administrateur', () => {
     cy.get('#email').type('test.admin@webdevoo.com')
     cy.get('input[placeholder="Mot de passe"]').type('SuperPassword123!')
 
-    // On injecte la valeur fautive sans passer par la validation native
+    // 🚀 CORRECTION : Utilisation de {force: true} ET trigger('change')
+    // Le 'change' est souvent nécessaire pour que Vue.js synchronise le v-model
     cy.get('#securityCode')
+      .clear()
       .invoke('val', 9999)
       .trigger('input')
+      .trigger('change') // Important pour forcer la mise à jour du state Vue
 
-    // On clique, ce qui déclenche handleSubmit
     cy.get('button[type="submit"]').click()
 
-    // Cypress attend que Vue rende le <li> dans le DOM
-    cy.get('li.error')
+    // Assertion : On cherche l'élément LI avec la classe error
+    cy.get('li.error', { timeout: 3000 })
       .should('be.visible')
       .and('contain', 'CODE DE SÉCURITÉ INVALIDE !')
   })
