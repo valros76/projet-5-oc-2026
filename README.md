@@ -179,6 +179,20 @@ bun run test:unit
 bun run test:unit:coverage
 ```
 
+### Mise en production
+
+* Compiler le code front-end (depuis la racine) :
+
+```bash
+bun run build
+```
+
+* Importer le dossier API.
+
+* Modifier les fichiers d'environnement pour la production.
+
+* Basculer le contenu du dossier **dist** et du dossier **api** sur le FTP.
+
 ## 👥 Contributeurs
 
 * Valérian Dufrène
