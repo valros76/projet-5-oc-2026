@@ -51,7 +51,7 @@ const handleSubmit = async () => {
       saveSessionUser(user)
       formData.email = ''
       formData.password = ''
-      router.push('/admin/statistiques')
+      router.replace('/admin/statistiques')
     } else if (response.status === 500) {
       addError(`Veuillez choisir une autre adresse email.`)
     } else {
