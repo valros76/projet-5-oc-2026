@@ -10,13 +10,13 @@ const router = createRouter({
     {
       path: "/",
       name: "Webdevoo, créateur de sites internet et organisme de formation depuis 2019",
-      meta: { 
+      meta: {
         title: "Webdevoo, créateur de sites internet et organisme de formation depuis 2019"
-       },
+      },
       component: () => import('../views/global/HomeView.vue'),
     },
     {
-      path:"/gites/site-pour-gite-en-baie-de-somme",
+      path: "/gites/site-pour-gite-en-baie-de-somme",
       name: "Site internet pour un gîte en Baie de Somme : boostez vos réservations directes sans commission",
       meta: {
         title: "Site internet pour un gîte en Baie de Somme : boostez vos réservations directes sans commission",
@@ -26,7 +26,7 @@ const router = createRouter({
       component: () => import("../views/landing/CottageLanding.vue")
     },
     {
-      path:"/artisans/site-pour-artisan-en-baie-de-somme",
+      path: "/artisans/site-pour-artisan-en-baie-de-somme",
       name: "Création site internet artisan somme : gagnez vos premiers devis locaux sans prospecter",
       meta: {
         title: "Création site internet artisan somme : gagnez vos premiers devis locaux sans prospecter",
@@ -36,7 +36,7 @@ const router = createRouter({
       component: () => import("../views/landing/ArtisanLanding.vue")
     },
     {
-      path:"/commercants/site-pour-boutique-commercant-local-en-baie-de-somme",
+      path: "/commercants/site-pour-boutique-commercant-local-en-baie-de-somme",
       name: "Boutique en ligne produits locaux dans la Somme : vendez vos produits dans toute la france",
       meta: {
         title: "Boutique en ligne produits locaux dans la Somme : vendez vos produits dans toute la france",
@@ -48,72 +48,80 @@ const router = createRouter({
     {
       path: "/nous-contacter",
       name: "Contacter Webdevoo, concepteur de sites web et boutiques en ligne depuis 2019",
-      meta: { 
+      meta: {
         title: "Contacter Webdevoo, concepteur de sites web et boutiques en ligne depuis 2019"
-       },
+      },
       component: () => import("../views/global/ContactView.vue"),
     },
     {
       path: "/message-envoye",
       name: "Message envoyé - Webdevoo",
-      meta: { 
+      meta: {
         title: "Message envoyé - Webdevoo"
-       },
+      },
       component: () => import("../views/global/MessageSend.vue"),
     },
     {
       path: "/nous-recontacter",
       name: "Essayer de recontacter Webdevoo, concepteur de sites web et boutiques en ligne depuis 2019",
-      meta: { 
+      meta: {
         title: "Essayer de recontacter Webdevoo, concepteur de sites web et boutiques en ligne depuis 2019"
-       },
+      },
       component: () => import("../views/error/ContactError.vue"),
     },
     {
       path: "/rgpd",
       name: "RGPD & Politique de cookies - Webdevoo",
-      meta: { 
+      meta: {
         title: "RGPD & Politique de cookies - Webdevoo"
-       },
+      },
       component: () => import("../views/global/RGPDView.vue"),
     },
     {
       path: "/cgu-cgv",
       name: "CGU & CGV - Webdevoo",
-      meta: { 
-        title: "CGU & CGV - Webdevoo" 
+      meta: {
+        title: "CGU & CGV - Webdevoo"
       },
       component: () => import("../views/global/CGUAndCGVView.vue"),
     },
     {
       path: "/mentions-legales",
       name: "Mentions légales - Webdevoo",
-      meta: { 
-        title: "Mentions légales - Webdevoo" 
+      meta: {
+        title: "Mentions légales - Webdevoo"
       },
       component: () => import("../views/global/LegalMentionsView.vue"),
     },
     {
       path: "/admin/register",
       name: "Création d'un compte administrateur - Webdevoo",
-      meta: { 
-        title: "Création d'un compte administrateur - Webdevoo" 
+      meta: {
+        title: "Création d'un compte administrateur - Webdevoo"
       },
       component: () => import("../views/admin/RegisterAdmin.vue"),
     },
     {
+      path: "/admin/disconnect",
+      name: "Déconnexion d'un compte administrateur - Webdevoo",
+      meta: {
+        title: "Déconnexion d'un compte administrateur - Webdevoo"
+      },
+      component: () => import("../views/admin/DisconnectAdmin.vue"),
+    },
+    {
       path: "/admin/statistiques",
       name: "Statistiques de tracking - Webdevoo",
-      meta: { 
-        title: "Statistiques de tracking - Webdevoo" 
+      meta: {
+        title: "Statistiques de tracking - Webdevoo"
       },
       component: () => import("../views/admin/TrackingStats.vue"),
     },
     {
       path: '/:pathMatch(.*)*',
       name: "Erreur 404 - Webdevoo",
-      meta: { 
-        title: "Erreur 404 - Webdevoo" 
+      meta: {
+        title: "Erreur 404 - Webdevoo"
       },
       component: () => import("../views/error/404.vue"),
     }

@@ -1,5 +1,11 @@
 <script setup lang="ts">
+import { authStore } from '@/stores/authStore'
+import { storeToRefs } from 'pinia';
 import { ref, type Ref } from 'vue'
+
+const store = authStore();
+const {user} = storeToRefs(store);
+
 const menuState: Ref<boolean, boolean> = ref(false)
 const toggleMenu = (e: any) => {
   e.preventDefault()
@@ -22,7 +28,7 @@ const closeMenu = (e: any) => {
     <span class="nav-btn-icon-close" v-if="menuState">❌</span>
   </button>
   <nav class="main-nav" :class="menuState ? 'open' : 'close'">
-    <RouterLink to="/" class="main-menu-links cta-links-secondary" @click="closeMenu">
+    <RouterLink to="/" class="main-menu-links" @click="closeMenu">
       Page d'accueil
     </RouterLink>
     <RouterLink
@@ -65,6 +71,7 @@ const closeMenu = (e: any) => {
     >
       Mentions légales
     </RouterLink>
+    <RouterLink v-if="user" to="/admin/disconnect" class="main-menu-links cta-links-ternary" @click="closeMenu">Déconnexion</RouterLink>
   </nav>
 </template>
 
