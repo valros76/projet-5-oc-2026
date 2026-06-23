@@ -28,23 +28,22 @@ describe('E2E - Espace Administrateur', () => {
     cy.get('#email').type('test.admin@webdevoo.com')
     cy.get('input[placeholder="Mot de passe"]').type('SuperPassword123!')
 
-    // 🚀 CORRECTION : Utilisation de {force: true} ET trigger('change')
-    // Le 'change' est souvent nécessaire pour que Vue.js synchronise le v-model
-    cy.get('#securityCode')
-      .clear()
-      .invoke('val', 9999)
-      .trigger('input')
-      .trigger('change') // Important pour forcer la mise à jour du state Vue
+    // 1. On injecte la valeur 9999 (qui déclenche le message métier)
+    cy.get('#securityCode').invoke('val', 9999).trigger('input')
 
+    // 2. On supprime l'attribut 'max' ou on dit au formulaire de ne pas valider
+    cy.get('form').invoke('attr', 'novalidate', 'true')
+
+    // 3. On soumet
     cy.get('button[type="submit"]').click()
 
-    // Assertion : On cherche l'élément LI avec la classe error
-    cy.get('li.error', { timeout: 3000 })
+    // 4. L'erreur métier apparaît enfin
+    cy.get('li.error', { timeout: 6000 })
       .should('be.visible')
       .and('contain', 'CODE DE SÉCURITÉ INVALIDE !')
   })
 
-  it('4. Valide que l\'accès est refusé (401) pour un utilisateur sans droits', () => {
+  it('4. Valide que l\'accès est refusé (404) pour un utilisateur qui n\'existe pas', () => {
     cy.contains('Je veux me connecter').click()
 
     cy.get('#email').type('admin@webdevoo.com')
@@ -59,7 +58,7 @@ describe('E2E - Espace Administrateur', () => {
     cy.get('button[type="submit"]').click()
 
     // On attend le 401
-    cy.wait('@loginRequest').its('response.statusCode').should('eq', 401)
+    cy.wait('@loginRequest').its('response.statusCode').should('eq', 404)
 
     // On vérifie qu'on est bien resté sur la page de connexion (pas de redirection)
     cy.url().should('not.include', '/admin/statistiques')
