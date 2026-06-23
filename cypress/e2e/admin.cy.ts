@@ -52,12 +52,12 @@ describe('E2E - Espace Administrateur', () => {
     const secureCode = Cypress.env('VITE_SECURITY_KEY') || '1000'
     cy.get('#securityCode').clear().type(secureCode)
 
-    // On intercepte pour vérifier le rejet 401
+    // On intercepte pour vérifier le rejet 404
     cy.intercept('POST', '**/api/v1/auth/connexion').as('loginRequest')
 
     cy.get('button[type="submit"]').click()
 
-    // On attend le 401
+    // On attend le 404
     cy.wait('@loginRequest').its('response.statusCode').should('eq', 404)
 
     // On vérifie qu'on est bien resté sur la page de connexion (pas de redirection)

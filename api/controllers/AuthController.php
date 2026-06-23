@@ -4,7 +4,8 @@ class AuthController extends BaseController
 
     public function Register()
     {
-        $json  = file_get_contents('php://input');
+        $json = file_get_contents('php://input');
+
         $datas = json_decode($json);
         $user  = (object) [
             "email"    => $datas->email ?? null,
