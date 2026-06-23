@@ -6,7 +6,7 @@ import { computed, nextTick, onMounted, onUnmounted, ref, watch } from 'vue'
 const nbPages = ref(1)
 const actualPage = ref(0)
 const cursors = ref<number[]>([0])
-const limit = ref(50)
+const limit = ref(10)
 const eventsCount = ref(0)
 const maxId = ref(0)
 const isLoading = ref(false)
@@ -17,7 +17,6 @@ let controller: AbortController | null = null
 
 const determineNbPages = async () => {
   eventsCount.value = await countEvents()
-  limit.value = 4
   nextTick()
   nbPages.value = Number(Math.ceil(eventsCount.value / limit.value))
 }
@@ -57,10 +56,6 @@ const loadEvents = async () => {
   }
 }
 
-const getLimitedDatas = () => {
-  loadEvents()
-}
-
 const parseMeta = (meta: string) => {
   try {
     return JSON.parse(meta)
@@ -98,9 +93,19 @@ const visibleNavigationPages = computed(() => {
   return range
 })
 
+const getLimitedDatas = (newLimit: number) => {
+  limit.value = Number(newLimit);
+}
+
 watch(nbPages, () => {
   if (nbPages.value < 0) nbPages.value = 0
 })
+
+watch(limit, async () => {
+  eventsCount.value = await countEvents()
+  await determineNbPages()
+  loadEvents()
+});
 
 onMounted(async () => {
   eventsCount.value = await countEvents()
@@ -116,8 +121,11 @@ onUnmounted(() => {
 <template>
   <article class="main-articles toolbar">
     <h2 class="main-articles-title">Sélection du nombre de logs (MAX : {{ eventsCount }})</h2>
-    <select v-model="limit" @change="getLimitedDatas">
+    <select v-model="limit">
       <option :value="eventsCount" selected>Nombre d'events : {{ eventsCount }}</option>
+      <option value="5">5</option>
+      <option value="10">10</option>
+      <option value="25">25</option>
       <option value="50">50</option>
       <option value="100">100</option>
       <option value="250">250</option>
@@ -140,7 +148,7 @@ onUnmounted(() => {
         :class="{
           active: page === actualPage + 1,
           first: page === 1,
-          last: page === nbPages - 1,
+          last: page === nbPages,
           previous: page === actualPage,
           next: page === actualPage + 2,
         }"

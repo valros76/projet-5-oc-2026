@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { authStore } from '@/stores/authStore';
-import { storeToRefs } from 'pinia';
-import { nextTick, onMounted, onUnmounted } from 'vue';
+import { onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
