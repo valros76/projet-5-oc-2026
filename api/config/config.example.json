@@ -1,0 +1,31 @@
+{
+  "autoloadFolders": [
+    "framework",
+    "controllers",
+    "models",
+    "framework/exceptions",
+    "utils",
+    "utils/exceptions"
+  ],
+  "database": {
+    "dev": {
+      "host": "127.0.0.1",
+      "dbname": "dbname",
+      "username": "username",
+      "password": "",
+      "encrypted_password": "",
+      "iv": "encrypted_password_iv",
+      "tag": "encrypted_password_tag"
+    },
+    "prod": {
+      "host": "127.0.0.1",
+      "dbname": "dbname",
+      "username": "username",
+      "password": "",
+      "encrypted_password": "encrypted_password",
+      "iv": "encrypted_password_iv",
+      "tag": "encrypted_password_tag"
+    }
+  },
+  "basepath": ""
+}

@@ -48,15 +48,13 @@ api/.env
 /api/.env
 ./api/.env
 
-api/config
 api/config/*
-/api/config
-/api/config/*
-./api/config
-./api/config/*
-!api/config/config.exemple
-!/api/config/config.exemple
-!./api/config/config.example
+!api/config/config.example.json
+!api/config/.htaccess.example
+!api/config/.htpasswd.example
+api/config/config.json
+api/config/.htaccess
+api/config/.htpasswd
 
 api/vendor
 api/vendor/*
