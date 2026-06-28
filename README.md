@@ -106,13 +106,25 @@ Ou avec NPM :
 npm install
 ```
 
+### Dépendances du backend
+
+Avec Composer :
+
+```bash
+cd api
+composer install
+```
+
 ## 3. Configuration
 
 Copiez le fichier `.env.example` :
 
 ```bash
 cp .env.example .env
+cp api/.env.example api/.env
 ```
+
+Pensez à modifier les valeurs du .env.
 
 ---
 
@@ -120,7 +132,7 @@ cp .env.example .env
 
 ## Variables d'environnement
 
-Configurez votre fichier `.env` :
+Dans `/api`, configurez votre fichier `.env` :
 
 ```env
 BDD_MODE=dev
@@ -139,7 +151,19 @@ Copiez les fichiers suivants :
 /api/config/config.example → /api/config/config.json
 ```
 
-Adaptez ensuite leur contenu à votre environnement.
+```bash
+cp api/config/.htaccess.example api/config/.htaccess
+```
+
+```bash
+cp api/config/.htpasswd.example api/config/.htpasswd
+```
+
+```bash
+cp api/config/config.example.json api/config/config.json
+```
+
+**Adaptez ensuite leur contenu à votre environnement.**
 
 Le fichier `config.json` permet notamment de configurer :
 
@@ -157,11 +181,11 @@ Les scripts SQL sont disponibles dans le dossier :
 /api/sql/
 ```
 
-Importez les tables avec :
+Importez les tables SQL :
 
 ```bash
-mysql -u username -p dbname < api/sql/users.sql
-mysql -u username -p dbname < api/sql/analytics_event.sql
+api/sql/users.sql
+api/sql/analytics_event.sql
 ```
 
 ---
