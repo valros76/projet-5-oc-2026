@@ -12,12 +12,17 @@ class AuthController extends BaseController
             "password" => password_hash($datas->password, PASSWORD_DEFAULT) ?? null,
             "is_admin" => (bool) $datas->is_admin ?? null,
         ];
+        $user = new UserCreateDTO(
+            email: $datas->email ?? null,
+            password: password_hash($datas->password, PASSWORD_DEFAULT) ?? null,
+            is_admin: (bool) $datas->is_admin ?? null
+        );
         if (is_null($user->email) || is_null($user->password) || is_null($user->is_admin)) {
             JSON::response("Données manquantes pour l'inscription.", 400);
         }
 
         $userManager = new User(BDD::getInstance(Config::getConfig()));
-        if (! $userManager->add($user)) {
+        if (! $userManager->add($user, $user->password)) {
             JSON::response("Une erreur s'est produite lors de l'inscription de l'utilisateur.", 500);
         }
 
@@ -53,6 +58,14 @@ class AuthController extends BaseController
         }
 
         unset($checkUser->password);
+        $actualUser = $userManager::getByEmail($checkUser->email);
+        $userDTO = new UserDTO(
+            $actualUser->id,
+            $actualUser->email,
+            $actualUser->is_admin,
+            $actualUser->inscription_date,
+        );
+        $_SESSION['user'] = $userDTO;
         JSON::response("L'utilisateur est authentifié.", 200, $checkUser);
     }
 }

@@ -2,8 +2,12 @@
   "autoloadFolders": [
     "framework",
     "controllers",
+    "enums",
     "models",
+    "models/dtos",
+    "models/interfaces",
     "framework/exceptions",
+    "services",
     "utils",
     "utils/exceptions"
   ],

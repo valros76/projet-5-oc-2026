@@ -29,5 +29,16 @@ export default defineConfig({
         statements: 60
       }
     }
+  },
+  server: {
+    host: '127.0.0.1', // Force l'utilisation de 127.0.0.1
+    port: 5173,        // Optionnel : vous pouvez spécifier le port ici
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:5500',
+        changeOrigin: true,
+        cookieDomainRewrite: "127.0.0.1",
+      }
+    }
   }
 })

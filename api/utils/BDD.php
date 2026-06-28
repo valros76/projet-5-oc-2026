@@ -1,51 +1,41 @@
 <?php
 class BDD
 {
-    private $bdd;
-    private static $instance;
+    private static ?PDO $instance = null;
 
-    private function __construct($bddConfig = null)
+    private function __construct() {}
+
+    public static function getInstance(): PDO
     {
+        if (is_null(self::$instance)) {
+            try{
+            $config = Config::getConfig();
+            $mode = $_ENV["BDD_MODE"] ?? 'dev';
 
-        if (is_null($bddConfig)) {
-            $configManager = new Config("config/config.json");
-            $config        = $configManager::getConfig();
-        } else {
-            $config = $bddConfig;
-        }
-        $bddMode = $_ENV["BDD_MODE"];
-        if (!in_array($bddMode, ["dev", "prod"])) {
-            $bddMode = "dev";
-        }
-        $db = ($bddMode === "prod") ? $config->database->prod : $config->database->dev;
-        $key = $_ENV["PASSWORD_ENCRYPT_KEY"];
-        $decrypted = openssl_decrypt(
-            base64_decode($db->encrypted_password),
-            $_ENV["PASSWORD_ENCRYPT_ALG"],
-            $key,
-            OPENSSL_RAW_DATA,
-            base64_decode($db->iv),
-            base64_decode($db->tag)
-        );
-        if ($bddMode === "dev") {
-            // $decrypted remplace : $config->database->dev->password
-            $this->bdd = new PDO("mysql:dbname={$config->database->dev->dbname};host={$config->database->dev->host};charset=utf8", $config->database->dev->username, $decrypted);
-        } else {
-            // $decrypted remplace : $config->database->prod->password
-            $this->bdd = new PDO("mysql:dbname={$config->database->prod->dbname};host={$config->database->prod->host};charset=utf8", $config->database->prod->username, $decrypted);
-        }
-    }
+            $bdd = ($mode === "prod") ? $config->database->prod : $config->database->dev;
 
-    public static function getInstance($bddConfig)
-    {
-        if (empty(self::$instance)) {
-            self::$instance = new BDD($bddConfig);
-        }
-        return self::$instance->bdd;
-    }
+            $decrypted = openssl_decrypt(
+                base64_decode($bdd->encrypted_password),
+                $_ENV["PASSWORD_ENCRYPT_ALG"],
+                $_ENV["PASSWORD_ENCRYPT_KEY"],
+                OPENSSL_RAW_DATA,
+                base64_decode($bdd->iv),
+                base64_decode($bdd->tag)
+            );
 
-    public function getBdd()
-    {
-        return $this->bdd;
+            $dsn = "mysql:host={$bdd->host};dbname={$bdd->dbname};charset=utf8mb4";
+
+            self::$instance = new PDO($dsn, $bdd->username, $decrypted, [
+                PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+                PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                PDO::ATTR_EMULATE_PREPARES => false,
+            ]);   
+            }catch(PDOException $e){
+                error_log("Erreur critique BDD : " . $e->getMessage());
+                throw new Exception("Impossible de se connecter à la base de données. Veuillez réessayer plus tard.");
+            }
+        }
+
+        return self::$instance;
     }
 }

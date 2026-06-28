@@ -5,7 +5,8 @@
     "action": "Index",
     "method": "GET",
     "params": [],
-    "manager": []
+    "manager": [],
+    "roles": ["ROLE_GUEST", "ROLE_ADMIN"]
   },
   {
     "path": "/api/contact",
@@ -15,7 +16,8 @@
     "params": [
       "params"
     ],
-    "manager": []
+    "manager": [],
+    "roles": ["ROLE_GUEST", "ROLE_ADMIN"]
   },
   {
     "path": "/contact",
@@ -25,7 +27,8 @@
     "params": [
       "params"
     ],
-    "manager": []
+    "manager": [],
+    "roles": ["ROLE_GUEST", "ROLE_ADMIN"]
   },
   {
     "path": "/connexion",
@@ -33,7 +36,8 @@
     "action": "Login",
     "method": "GET",
     "param": [],
-    "manager": []
+    "manager": [],
+    "roles": ["ROLE_GUEST", "ROLE_ADMIN"]
   },
   {
     "path": "/connexion",
@@ -46,7 +50,8 @@
     ],
     "manager": [
       "User"
-    ]
+    ],
+    "roles": ["ROLE_GUEST", "ROLE_ADMIN"]
   },
   {
     "path": "/error",
@@ -54,7 +59,8 @@
     "action": "Show",
     "method": "GET",
     "param": [],
-    "manager": []
+    "manager": [],
+    "roles": ["ROLE_GUEST", "ROLE_ADMIN"]
   },
   {
     "path": "/api/v1/auth/register",
@@ -64,7 +70,8 @@
     "params": [
       "user"
     ],
-    "manager": []
+    "manager": [],
+    "roles": []
   },
   {
     "path": "/api/v1/auth/connexion",
@@ -74,7 +81,8 @@
     "params": [
       "user"
     ],
-    "manager": []
+    "manager": [],
+    "roles": []
   },
   {
     "path": "/api/v1/welcome",
@@ -82,7 +90,8 @@
     "action": "HelloWorld",
     "method": "GET",
     "params": [],
-    "manager": []
+    "manager": [],
+    "roles": ["ROLE_GUEST", "ROLE_ADMIN"]
   },
   {
     "path": "/api/v1/analytics",
@@ -92,7 +101,8 @@
     "params": [],
     "manager": [
       "Analytics"
-    ]
+    ],
+    "roles": ["ROLE_ADMIN"]
   },
   {
     "path": "/api/v1/analytics/view-events",
@@ -102,7 +112,8 @@
     "params": [],
     "manager": [
       "Analytics"
-    ]
+    ],
+    "roles": ["ROLE_ADMIN"]
   },
   {
     "path": "/api/v1/analytics/count-events",
@@ -112,7 +123,8 @@
     "params": [],
     "manager": [
       "Analytics"
-    ]
+    ],
+    "roles": ["ROLE_ADMIN"]
   },
   {
     "path": "/api/test",
@@ -122,6 +134,7 @@
     "params": [
       "value"
     ],
-    "manager": []
+    "manager": [],
+    "roles": ["ROLE_GUEST", "ROLE_ADMIN"]
   }
 ]

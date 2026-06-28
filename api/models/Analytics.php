@@ -40,7 +40,7 @@ class Analytics
 
     public static function countEvents()
     {
-        return self::$bdd->query("SELECT COUNT(id) FROM analytics_events")->fetch()[0];
+        return self::$bdd->query("SELECT COUNT(id) FROM analytics_events")->fetchColumn();
     }
 
     private static function setBdd(PDO $bdd)

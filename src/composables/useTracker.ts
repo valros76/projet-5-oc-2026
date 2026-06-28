@@ -1,5 +1,5 @@
 export const useTracker = () => {
-  const apiPath = import.meta.env.VITE_API_URL ?? "https://webdevoo.com/api";
+  const apiPath = import.meta.env.VITE_MODE === "production" ? import.meta.env.VITE_API_URL : "/api";
   const apiAnalyticsPath = `${apiPath}/v1/analytics`;
 
   const trackEvent = async (eventName: string, metadata: Record<string, any> = {}) => {
@@ -9,6 +9,7 @@ export const useTracker = () => {
       await fetch(apiAnalyticsPath, {
         signal: controller.signal,
         method: "POST",
+        credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           event_name: eventName,
@@ -35,14 +36,14 @@ export const useTracker = () => {
 
   const getTrackEvents = async (offset: number = 0, limit: number = 250, signal?: AbortSignal) => {
     const url = `${apiAnalyticsPath}/view-events?offset=${offset}&limit=${limit}`;
-    const response = await fetch(url, { signal, method: "GET" });
+    const response = await fetch(url, { signal, method: "GET", credentials: "include"});
     if (!response.ok) throw new Error("Erreur réseau");
     return await response.json();
   }
 
   const countEvents = async () => {
     const url = `${apiAnalyticsPath}/count-events`;
-    const response = await fetch(url, { method: "GET" });
+    const response = await fetch(url, { method: "GET", credentials: "include" });
     if (!response.ok) throw new Error("Erreur lors de l'appel à l'API pour lancer countEvents.");
     const result = await response.json();
     const count = Number(result.params[0].events_count);
