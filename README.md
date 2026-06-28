@@ -1,4 +1,3 @@
-````markdown
 # Webdevoo Landing
 
 Application dédiée à l'optimisation de la conversion pour les professionnels de la Baie de Somme (gîtes, artisans et commerçants). Le projet propose plusieurs landing pages spécialisées, des simulateurs interactifs, un système d'analytics personnalisé ainsi qu'une interface d'administration sécurisée.
@@ -308,4 +307,3 @@ L'utilisation de l'IA est restée limitée à un rôle d'assistance technique. L
 ## Entreprise
 
 **Webdevoo**
-````
