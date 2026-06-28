@@ -120,7 +120,8 @@ composer install
 Copiez le fichier `.env.example` :
 
 ```bash
-cp .env.example .env
+cp .env.example .env.development
+cp .env.example .env.production
 cp api/.env.example api/.env
 ```
 
@@ -199,6 +200,16 @@ Le backend permet de chiffrer les identifiants de connexion à la base de donné
 - `encrypted_password`
 - `iv`
 - `tag`
+
+## Encrypter vos informations
+
+Rendez-vous sur : 
+```bash
+http://127.0.0.1:5500/encrypt.php
+```
+
+Pour créer des données cryptées, vous pouvez utiliser le fichier `/api/encrypt.php`, qui vous permettra d'ajouter simplement un mot de passe à crypter, puis de déclencher le fichier, pour récupérer les informations à inclure à votre fichier `/api/config/config.json`.
+⚠️ Sans ces données encryptées, vous ne pourrez pas vous connecter à la base de données.
 
 Les identifiants peuvent ainsi être stockés de manière chiffrée dans `config.json` pour les environnements de production.
 

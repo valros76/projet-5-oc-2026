@@ -16,5 +16,7 @@ $encrypted = openssl_encrypt($password, $cipher, $key, $options=0, $iv, $tag);
 
 // Stockez ces valeurs (en base64 pour éviter les caractères spéciaux)
 echo "Encrypted: " . $encrypted . "\n";
+echo "<hr/>";
 echo "IV: " . base64_encode($iv) . "\n";
+echo "<hr/>";
 echo "Tag: " . base64_encode($tag) . "\n";
