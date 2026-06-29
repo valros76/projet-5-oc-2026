@@ -1,64 +1,334 @@
 # Structure du Projet Webdevoo Landing
 
-Le projet est divisé en deux parties principales : le frontend (Vite/Vue) et le backend (PHP MVC).
+## Objectif
 
-## 📂 Organisation des dossiers
+Le projet est composé de deux applications distinctes :
 
-### Frontend (`/src`)
+- un frontend développé avec Vue.js, TypeScript et Vite ;
+- un backend développé en PHP suivant une architecture MVC.
 
-* `components/` : Composants UI réutilisables (Dialogs, Layouts, Navigation).
-* `composables/` : Logique métier partagée (ex. : `useTracker`, `useAuth`).
-* `stores/` : État global de l'application (Pinia).
-* `views/landing/` : Landing pages spécifiques (cottage, artisan, merchant).
-* `utils/` : Fonctions utilitaires (debounce, formatters, helpers, etc.).
+Cette séparation permet d'isoler l'interface utilisateur, la logique métier et l'accès aux données afin de faciliter la maintenance, les tests et les évolutions.
 
-### Backend (`/api`)
+---
 
-Architecture MVC personnalisée :
+# Organisation générale
 
-* `controllers/` : Gestion des requêtes (`AuthController`, `AnalyticsController`, etc.).
-* `models/` : Interaction avec la base de données (entités comme `User`, `Analytics`).
-* `routes/` : Définition des endpoints et routage des requêtes.
-* `exceptions/` : Gestion centralisée des erreurs PHP.
-* `sql/` : Schémas, migrations et scripts de base de données.
+```text
+Navigateur
+      │
+      ▼
+Frontend Vue.js
+      │
+      ▼
+API PHP MVC
+      │
+      ▼
+MySQL
+```
 
-### Tests (`/cypress`)
+---
 
-* `e2e/` : Scénarios de tests end-to-end pour valider les parcours utilisateurs (connexion, calculatrices, pagination, formulaires, etc.).
+# Structure du Frontend
 
-### Ressources (`/public` & `/assets`)
+Le frontend est principalement contenu dans le dossier `src`.
 
-* `assets/` : Contient les images, logos, polices (BeauSans, Figtree) et vidéos promotionnelles.
-* `public/` : Fichiers statiques accessibles directement par le navigateur.
-* `serviceWorker.js` : Gestion du cache et des fonctionnalités hors ligne.
+## components/
 
-## 🏗️ Architecture Générale
+Contient les composants Vue réutilisables utilisés dans plusieurs pages.
+
+Exemples :
+
+- composants d'administration ;
+- composants de formulaire ;
+- composants d'illustration ;
+- composants communs.
+
+---
+
+## composables/
+
+Contient la logique métier réutilisable sous forme de composables.
+
+Exemples :
+
+- authentification (`useAuth`)
+- analytics (`useTracker`)
+
+---
+
+## interfaces/
+
+Contient les interfaces TypeScript utilisées dans l'application.
+
+Exemples :
+
+- utilisateurs
+- analytics
+- zones géographiques
+
+---
+
+## router/
+
+Contient la configuration de Vue Router.
+
+Responsabilités :
+
+- déclaration des routes ;
+- gestion de la navigation ;
+- page 404.
+
+---
+
+## stores/
+
+Contient les stores Pinia.
+
+Responsabilités :
+
+- authentification ;
+- cookies ;
+- analytics ;
+- autres états globaux de l'application.
+
+---
+
+## utils/
+
+Fonctions utilitaires réutilisables.
+
+Exemple :
+
+- debounce
+
+---
+
+## views/
+
+Contient les différentes pages de l'application.
+
+On y retrouve notamment :
+
+- HomeView.vue
+- ContactView.vue
+- MessageSend.vue
+- ContactError.vue
+- RGPDView.vue
+- CGUAndCGVView.vue
+- LegalMentionsView.vue
+- TrackingStats.vue
+- CottageLanding.vue
+- ArtisanLanding.vue
+- MerchantLanding.vue
+
+---
+
+## test/
+
+Configuration utilisée pour les tests unitaires.
+
+---
+
+## main.ts
+
+Point d'entrée de l'application Vue.
+
+Responsabilités :
+
+- création de l'application ;
+- chargement des plugins ;
+- montage de Vue.
+
+---
+
+# Structure du Backend
+
+Le backend repose sur une architecture MVC.
+
+Les principaux dossiers sont :
+
+## controllers/
+
+Contient les contrôleurs responsables du traitement des requêtes HTTP.
+
+Exemples :
+
+- AuthController
+- ContactController
+- AnalyticsController
+- WelcomeController
+- TestController
+
+---
+
+## models/
+
+Contient les modèles responsables des interactions avec la base de données.
+
+Exemples :
+
+- User
+- Analytics
+- Contact
+
+---
+
+## routes/
+
+Déclaration des routes de l'API.
+
+Les routes redirigent les requêtes HTTP vers les contrôleurs appropriés.
+
+---
+
+# Base de données
+
+Le backend utilise MySQL.
+
+Les principales tables actuellement utilisées sont :
+
+- user
+- analytics_events
+- sav
+
+---
+
+# Tests
+
+Le projet contient plusieurs niveaux de tests.
+
+## Tests unitaires
+
+Utilisent :
+
+- Vitest
+- Vue Test Utils
+
+Configuration :
+
+- vitest.config.ts
+
+---
+
+## Tests End-to-End
+
+Réalisés avec Cypress.
+
+Ils permettent de tester les parcours utilisateurs complets.
+
+Exemples :
+
+- navigation
+- formulaires
+- authentification
+- landing pages
+
+---
+
+# Ressources statiques
+
+## public/
+
+Contient les fichiers accessibles directement par le navigateur.
+
+---
+
+## assets/
+
+Contient notamment :
+
+- images ;
+- polices ;
+- feuilles de style.
+
+---
+
+# Configuration
+
+Les principaux fichiers de configuration sont :
+
+| Fichier | Rôle |
+|---------|------|
+| package.json | Dépendances et scripts |
+| vite.config.ts | Configuration de Vite |
+| vitest.config.ts | Configuration de Vitest |
+| tsconfig.json | Configuration TypeScript |
+| tsconfig.app.json | Configuration TypeScript de l'application |
+| env.d.ts | Déclarations TypeScript pour Vite |
+| .env | Variables d'environnement |
+| .env.production | Variables de production |
+
+---
+
+# Architecture simplifiée
 
 ```text
 webdevoo-landing/
+│
 ├── api/
 │   ├── controllers/
 │   ├── models/
-│   ├── routes/
-│   ├── exceptions/
-│   └── sql/
+│   └── routes/
+│
 ├── src/
 │   ├── components/
 │   ├── composables/
+│   ├── interfaces/
+│   ├── router/
 │   ├── stores/
+│   ├── test/
+│   ├── utils/
 │   ├── views/
-│   │   └── landing/
-│   └── utils/
+│   └── main.ts
+│
+├── public/
 ├── cypress/
 │   └── e2e/
-├── public/
-├── assets/
-├── .env
-├── vite.config.ts
+│
 ├── package.json
-└── README.md
+├── vite.config.ts
+├── vitest.config.ts
+├── tsconfig.json
+├── tsconfig.app.json
+├── env.d.ts
+├── .env
+└── .env.production
 ```
 
-## 📌 Objectif
+---
 
-Cette structure vise à séparer clairement la logique métier, l'interface utilisateur et les services backend afin de faciliter la maintenance, les tests et l'évolution du projet.
+# Flux général
+
+```text
+Utilisateur
+      │
+      ▼
+Vue Router
+      │
+      ▼
+Vue Component
+      │
+      ▼
+Composable
+      │
+      ▼
+Requête HTTP
+      │
+      ▼
+API PHP MVC
+      │
+      ▼
+Controller
+      │
+      ▼
+Model
+      │
+      ▼
+MySQL
+```
+
+---
+
+# Remarques
+
+Cette documentation décrit l'organisation actuelle du projet. Elle devra être mise à jour lors de l'ajout, de la suppression ou de la réorganisation de dossiers, composants, services ou modules afin de rester cohérente avec l'architecture du projet.
