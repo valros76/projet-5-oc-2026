@@ -201,9 +201,16 @@ AuthController::Connect()
 
 ```json
 {
-  "message" : "L'utilisateur est authentifié.",
-  "params" : [{"id": 42, "email": "admin42@mail.com", "is_admin": 1, "inscription_date": "2021-02-09 13:21:09"}],
-  "status" : 200
+  "message": "L'utilisateur est authentifié.",
+  "params": [
+    {
+      "id": 42,
+      "email": "admin42@mail.com",
+      "is_admin": 1,
+      "inscription_date": "2021-02-09 13:21:09"
+    }
+  ],
+  "status": 200
 }
 ```
 
@@ -225,11 +232,9 @@ POST /api/v1/analytics
 
 ```json
 {
-  "event_name": "calculator_submit",
-  "page_url": "/gites/site-pour-gite-en-baie-de-somme",
-  "metadata": {
-    "commissions": 1200
-  }
+  "event_name": "",
+  "page_url": "",
+  "metadata": {}
 }
 ```
 
@@ -262,15 +267,31 @@ AnalyticsController::ViewEvents()
 ### Réponse
 
 ```json
-[
-  {
-    "id": 1,
-    "event_name": "calculator_submit",
-    "page_url": "/gites/site-pour-gite-en-baie-de-somme",
-    "metadata": {},
-    "created_at": "2026-01-01 12:00:00"
-  }
-]
+[{
+  "message": "Récupération des derniers évènements réussie !",
+  "status": 200,
+  "params": [{
+    "0": {
+      "datas": [{
+        "0": {
+          "id": 18,
+          "event_name": "local_visibility_calculated",
+          "metadata": "{\"job\":\"Aiguiseur\",\"city\":\"test\",\"searchUrl\":\"https:\\/\\/www.google.com\\/search?q=aiguiseur+test\"}",
+          "page_url": "https://proj-5-oc.webdevoo.com/artisans/site-pour-artisan-en-baie-de-somme",
+          "created_at": "2026-06-29 14:04:58"
+        },
+        "1": {
+          "id": 17,
+          "event_name": "form_input_filled",
+          "metadata": "{\"field\":\"city\",\"value\":\"test\",\"page\":\"local_visibility\"}",
+          "page_url": "https://proj-5-oc.webdevoo.com/artisans/site-pour-artisan-en-baie-de-somme",
+          "created_at": "2026-06-29 14:04:57"
+        }
+      }],
+      "max_id": 0
+    }
+  }]
+}]
 ```
 
 ---
@@ -290,9 +311,15 @@ AnalyticsController::CountEvents()
 ### Réponse
 
 ```json
-{
-  "total": 1254
-}
+[{
+  "message": "Récupération du nombre d'évènements existants en BDD.",
+  "params": {
+    "0": {
+      "events_count" : 3
+    }
+  },
+  "status": 200
+}]
 ```
 
 ---
@@ -335,7 +362,7 @@ WelcomeController::HelloWorld()
 
 ```json
 {
-  "message": "Hello World"
+  "helloWorld": "Bonjour ! Bienvenue sur l'API de Webdevoo, vous allez être redirigé sur notre site, pour nourrir votre curiosité !"
 }
 ```
 
@@ -378,7 +405,7 @@ MySQL
 Utilisateur
     │
     ▼
-Simulation économies Airbnb
+Simulation économies Airbnb/Booking/etc...
     │
     ▼
 Analytics SaveEvent
@@ -401,7 +428,7 @@ Envoi Email
 Utilisateur
     │
     ▼
-Simulation devis
+Test visibilité locale
     │
     ▼
 Analytics SaveEvent
@@ -421,7 +448,7 @@ ContactController
 Utilisateur
     │
     ▼
-Simulation ventes
+Simulation potentiel de ventes en ligne
     │
     ▼
 Analytics SaveEvent
@@ -487,6 +514,19 @@ Utilisée par :
 
 - AnalyticsController
 - Analytics
+
+---
+
+## sav
+
+```sql
+sav
+```
+
+Utilisée par :
+
+- ContactController
+- Contact
 
 ---
 
