@@ -185,6 +185,7 @@ Les scripts SQL sont disponibles dans le dossier :
 Importez les tables SQL :
 
 ```bash
+api/sql/sav.sql
 api/sql/users.sql
 api/sql/analytics_event.sql
 ```
