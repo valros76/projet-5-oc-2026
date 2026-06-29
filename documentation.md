@@ -6,10 +6,10 @@ Ce document décrit les interactions entre l'application Vue.js (frontend) et l'
 
 Il permet aux développeurs de :
 
-* comprendre les flux applicatifs ;
-* identifier les endpoints utilisés ;
-* connaître les formats de données échangés ;
-* faciliter la maintenance et les évolutions.
+- comprendre les flux applicatifs ;
+- identifier les endpoints utilisés ;
+- connaître les formats de données échangés ;
+- faciliter la maintenance et les évolutions.
 
 ---
 
@@ -35,6 +35,27 @@ API PHP MVC
     ▼
 MySQL
 ```
+
+---
+
+# Technologies utilisées
+
+## Frontend
+
+- Vue.js
+- Vite
+- Vue Router
+- Pinia
+- TypeScript
+
+## Backend
+
+- PHP (architecture MVC)
+- API REST
+
+## Base de données
+
+- MySQL
 
 ---
 
@@ -67,9 +88,25 @@ MySQL
 
 # API Backend
 
-## Contact
+## Vue d'ensemble
 
-### Envoi du formulaire de contact
+| Méthode | Endpoint                       | Contrôleur                         |
+| ------- | ------------------------------ | ---------------------------------- |
+| POST    | /api/contact                   | ContactController::SendMail()      |
+| POST    | /contact                       | ContactController::SendMail()      |
+| POST    | /api/v1/auth/register          | AuthController::Register()         |
+| POST    | /api/v1/auth/connexion         | AuthController::Connect()          |
+| POST    | /api/v1/analytics              | AnalyticsController::SaveEvent()   |
+| GET     | /api/v1/analytics/view-events  | AnalyticsController::ViewEvents()  |
+| GET     | /api/v1/analytics/count-events | AnalyticsController::CountEvents() |
+| GET     | /api/test                      | TestController::Test()             |
+| GET     | /api/v1/welcome                | WelcomeController::HelloWorld()    |
+
+---
+
+# Contact
+
+## Envoi du formulaire de contact
 
 ```http
 POST /api/contact
@@ -85,10 +122,11 @@ POST /contact
 
 ```json
 {
-  "firstname": "Jean",
-  "lastname": "Dupont",
-  "email": "jean@example.com",
-  "message": "Bonjour"
+    "reason": formDatas.value.reason.value,
+    "email": formDatas.value.email.value,
+    "message": formDatas.value.message.value,
+    "returnDate": formDatas.value.returnDate.value,
+    "rgpd": formDatas.value.rgpd.value,
 }
 ```
 
@@ -102,7 +140,7 @@ ContactController::SendMail()
 
 ```json
 {
-  "success": true
+  "status": 200
 }
 ```
 
@@ -121,8 +159,9 @@ POST /api/v1/auth/register
 ```json
 {
   "user": {
-    "mail": "admin@example.com",
-    "password": "password"
+    "email": "",
+    "password": "",
+    "is_admin": true
   }
 }
 ```
@@ -146,8 +185,8 @@ POST /api/v1/auth/connexion
 ```json
 {
   "user": {
-    "mail": "admin@example.com",
-    "password": "password"
+    "email": "",
+    "password": ""
   }
 }
 ```
@@ -162,8 +201,9 @@ AuthController::Connect()
 
 ```json
 {
-  "success": true,
-  "token": "jwt-token"
+  "message" : "L'utilisateur est authentifié.",
+  "params" : [{"id": 42, "email": "admin42@mail.com", "is_admin": 1, "inscription_date": "2021-02-09 13:21:09"}],
+  "status" : 200
 }
 ```
 
@@ -303,6 +343,35 @@ WelcomeController::HelloWorld()
 
 # Flux Métier
 
+## Flux général
+
+```text
+Utilisateur
+    │
+    ▼
+Vue Router
+    │
+    ▼
+Composant Vue
+    │
+    ▼
+Composable
+    │
+    ▼
+API PHP MVC
+    │
+    ▼
+Controller
+    │
+    ▼
+Model
+    │
+    ▼
+MySQL
+```
+
+---
+
 ## Landing Gîte
 
 ```text
@@ -403,8 +472,8 @@ user
 
 Utilisée par :
 
-* AuthController
-* User
+- AuthController
+- User
 
 ---
 
@@ -416,8 +485,11 @@ analytics_events
 
 Utilisée par :
 
-* AnalyticsController
-* Analytics
+- AnalyticsController
+- Analytics
 
-```
-```
+---
+
+# Remarques
+
+Cette documentation décrit les interactions actuellement implémentées entre le frontend Vue.js et l'API PHP MVC. Elle devra être mise à jour à chaque ajout, modification ou suppression d'un endpoint, d'une route frontend ou d'un flux métier afin de rester cohérente avec l'application.

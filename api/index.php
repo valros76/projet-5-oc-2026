@@ -12,7 +12,7 @@ Autoloader::register();
 session_set_cookie_params([
     "lifetime" => 0,
     "path" => "/",
-    "domain" => $isProduction ? "proj-5-oc.webdevoo.com" : "127.0.0.1",
+    "domain" => null,
     "secure" => $isProduction, // Obligatoirement true en HTTPS
     "httponly" => true, // Protège contre le XSS
     "samesite" => "Lax",
