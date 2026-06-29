@@ -75,8 +75,7 @@ class Contact{
    }
 
    public static function add(string $message_from, string $message_to, string $subject, string $content){
-      $req = self::$bdd->prepare("INSERT INTO sav(id, message_from, message_to, subject, content, creation_date) VALUES(:id, :message_from, :message_to, :subject, :content, NOW())");
-      $req->bindValue(":id", self::$bdd->lastInsertId(), PDO::PARAM_INT);
+      $req = self::$bdd->prepare("INSERT INTO sav(message_from, message_to, subject, content, creation_date) VALUES(:message_from, :message_to, :subject, :content, NOW())");
       $req->bindValue(":message_from", $message_from, PDO::PARAM_STR);
       $req->bindValue(":message_to", $message_to, PDO::PARAM_STR);
       $req->bindValue(":subject", $subject, PDO::PARAM_STR);

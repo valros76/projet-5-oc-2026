@@ -56,7 +56,7 @@ const onSubmit = async (e: any) => {
     rgpd: formDatas.value.rgpd.value,
   }
 
-  const submitDatas = await fetch('https://webdevoo.com/api/contact', {
+  const submitDatas = await fetch('https://proj-5-oc.webdevoo.com/api/contact', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
