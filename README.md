@@ -137,7 +137,7 @@ Dans `/api`, configurez votre fichier `.env` :
 
 ```env
 BDD_MODE=dev
-
+BDD_PASSWORD=votremdpbdd
 PASSWORD_ENCRYPT_KEY=VotreCleDeCryptage
 PASSWORD_ENCRYPT_ALG=aes-256-gcm
 ```
