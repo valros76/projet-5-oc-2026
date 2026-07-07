@@ -58,3 +58,6 @@ api/config/.htpasswd
 
 api/vendor
 api/vendor/*
+
+0-livrables
+0-livrables/*

@@ -75,7 +75,7 @@ describe('ContactForm.vue (intégration)', () => {
 
     expect(fetchMock).toHaveBeenCalledTimes(1)
     const [url, options] = fetchMock.mock.calls[0]!
-    expect(url).toBe('https://webdevoo.com/api/contact')
+    expect(url).toBe("https://proj-5-oc.webdevoo.com/api/contact")
     expect(options.method).toBe('POST')
 
     const body = JSON.parse(options.body)
