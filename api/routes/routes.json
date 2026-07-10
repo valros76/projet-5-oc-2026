@@ -102,7 +102,7 @@
     "manager": [
       "Analytics"
     ],
-    "roles": ["ROLE_ADMIN"]
+    "roles": []
   },
   {
     "path": "/api/v1/analytics/view-events",
