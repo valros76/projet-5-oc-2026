@@ -209,6 +209,8 @@ Rendez-vous sur :
 http://127.0.0.1:5500/encrypt.php
 ```
 
+⚠️ Pensez à supprimer le fichier `/api/encrypt.php` ou à le placer dans un répertoire sécurisé par identifiant et mot de passe, une fois la configuration terminée.
+
 Pour créer des données cryptées, vous pouvez utiliser le fichier `/api/encrypt.php`, qui vous permettra d'ajouter simplement un mot de passe à crypter, puis de déclencher le fichier, pour récupérer les informations à inclure à votre fichier `/api/config/config.json`.
 ⚠️ Sans ces données encryptées, vous ne pourrez pas vous connecter à la base de données.
 
