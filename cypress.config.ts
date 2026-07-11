@@ -1,6 +1,6 @@
 import { defineConfig } from 'cypress'
 import { loadEnv } from 'vite'
-
+import registerCodeCoverageTasks from '@cypress/code-coverage/task';
 // On charge les variables d'environnement manuellement pour le mode 'development'
 const viteEnv = loadEnv('development', process.cwd(), 'VITE_')
 
@@ -17,5 +17,9 @@ export default defineConfig({
     specPattern: 'cypress/e2e/**/*.cy.{js,jsx,ts,tsx}',
     supportFile: false, // Attention : mettre à false désactive les commandes personnalisées si tu en as
     baseUrl: 'http://localhost:5173',
+    setupNodeEvents(on, config) {
+      registerCodeCoverageTasks(on, config);
+      return config;
+    },
   },
 })
