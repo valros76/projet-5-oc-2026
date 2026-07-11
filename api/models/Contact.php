@@ -1,22 +1,14 @@
 <?php
-class Contact{
+class Contact extends Model{
    private static int $id;
    private static string $message_from;
    private static string $message_to;
    private static string $subject;
    private static string $content;
    private static string $creation_date;
-   private static $bdd;
 
    private static $server_mail = "developpeur@webdevoo.com";
    // private static $server_mail = "webdevoo.pro@gmail.com";
-
-   public function __construct($bdd = null)
-   {
-      if (!is_null($bdd)) {
-         self::setBdd($bdd);
-      }
-   }
 
    public static function getId(): int{
       return self::$id;
@@ -75,7 +67,7 @@ class Contact{
    }
 
    public static function add(string $message_from, string $message_to, string $subject, string $content){
-      $req = self::$bdd->prepare("INSERT INTO sav(message_from, message_to, subject, content, creation_date) VALUES(:message_from, :message_to, :subject, :content, NOW())");
+      $req = self::$bdd->prepare("INSERT INTO sav(message_from, message_to, subject, content, creation_date) VALUES(:message_from, :message_to, :subject, :content, CURRENT_TIMESTAMP)");
       $req->bindValue(":message_from", $message_from, PDO::PARAM_STR);
       $req->bindValue(":message_to", $message_to, PDO::PARAM_STR);
       $req->bindValue(":subject", $subject, PDO::PARAM_STR);
@@ -96,7 +88,7 @@ class Contact{
       return self::$bdd->exec("DELETE FROM sav WHERE id=$id");
    }
 
-   public static function getList(): ?object{
+   public static function getList(): ?array{
       $req = self::$bdd->prepare("SELECT id, message_from, message_to, subject, content, creation_date FROM sav");
       $req->execute();
       $datas = $req->fetchAll(PDO::FETCH_OBJ);
@@ -107,7 +99,7 @@ class Contact{
       return null;
    }
 
-   public static function getListByMessageFrom(string $message_from): ?object{
+   public static function getListByMessageFrom(string $message_from): ?array{
       $req = self::$bdd->prepare("SELECT id, message_from, message_to, subject, content, creation_date FROM sav WHERE message_from=:message_from");
       $req->bindValue(":message_from", $message_from, PDO::PARAM_STR);
       $req->execute();
@@ -119,7 +111,7 @@ class Contact{
       return null;
    }
 
-   public static function getListByMessageTo(string $message_to): ?object{
+   public static function getListByMessageTo(string $message_to): ?array{
       $req = self::$bdd->prepare("SELECT id, message_from, message_to, subject, content, creation_date FROM sav WHERE message_to=:message_to");
       $req->bindValue(":message_to", $message_to, PDO::PARAM_STR);
       $req->execute();
@@ -131,7 +123,7 @@ class Contact{
       return null;
    }
 
-   public static function getListByCreationDate(string $creation_date): ?object{
+   public static function getListByCreationDate(string $creation_date): ?array{
       $req = self::$bdd->prepare("SELECT id, message_from, message_to, subject, content, creation_date FROM sav WHERE creation_date=:creation_date ORDER BY creation_date DESC");
       $req->bindValue(":creation_date", $creation_date, PDO::PARAM_STR);
       $req->execute();
@@ -144,7 +136,7 @@ class Contact{
    }
 
    public static function getById(int $id): ?object{
-      $req = self::$bdd->prepare("SELECT id, message_from, message_to, subject, content, creation_date WHERE id=:id");
+      $req = self::$bdd->prepare("SELECT id, message_from, message_to, subject, content, creation_date FROM sav WHERE id=:id");
       $req->bindValue(":id", $id, PDO::PARAM_INT);
       $req->execute();
       $datas = $req->fetch(PDO::FETCH_OBJ);
@@ -156,7 +148,7 @@ class Contact{
    }
 
    public static function getBySubject(int $subject): ?object{
-      $req = self::$bdd->prepare("SELECT id, message_from, message_to, subject, content, creation_date WHERE subject=:subject");
+      $req = self::$bdd->prepare("SELECT id, message_from, message_to, subject, content, creation_date FROM sav WHERE subject=:subject");
       $req->bindValue(":subject", $subject, PDO::PARAM_STR);
       $req->execute();
       $datas = $req->fetch(PDO::FETCH_OBJ);
@@ -240,9 +232,5 @@ class Contact{
       }
       $req->closeCursor();
       return false;
-   }
-
-   public static function setBdd($bdd){
-      self::$bdd = $bdd;
    }
 }
